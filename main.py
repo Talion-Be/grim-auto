@@ -1,21 +1,25 @@
+# Netbox Deployment (fichier actuel)
 import pyautogui
 import time
 import keyboard
 
-# Coordonnées des positions à cliquer (tu peux les ajuster)
-positions = [(100, 200), (300, 400), (500, 600)]
+positions = []
 
-print("✅ Appuie sur la touche F2 pour commencer.")
-keyboard.wait("F2")  # Attend que tu appuies sur F2
-
-print("🚀 Script lancé. Appuie sur 'Esc' pour arrêter.")
+print("📍 Mode enregistrement activé.")
+print("➡️ Appuie sur F8 pour enregistrer une position.")
+print("✅ Appuie sur F9 pour terminer l'enregistrement.")
 
 while True:
-    if keyboard.is_pressed("esc"):
-        print("🛑 Script arrêté.")
+    if keyboard.is_pressed("F8"):
+        pos = pyautogui.position()
+        positions.append(pos)
+        print(f"💾 Position enregistrée: {pos}")
+        time.sleep(0.3)  # Anti double clic
+
+    if keyboard.is_pressed("F9"):
+        print("🛑 Enregistrement terminé.")
         break
 
-    for x, y in positions:
-        print(f"➡️ Clique en ({x}, {y})")
-        pyautogui.click(x, y)
-        time.sleep(1)  # Attendre 1 seconde entre les clics
+print("\n📌 Liste des positions enregistrées :")
+for i, (x, y) in enumerate(positions, 1):
+    print(f"{i}. ({x}, {y})")
