@@ -1,22 +1,21 @@
-# main.py
-
-import time
 import pyautogui
+import time
+import keyboard
 
-def move_to(x, y):
-    print(f"Déplacement vers ({x}, {y})")
-    pyautogui.moveTo(x, y)
-    pyautogui.click()
+# Coordonnées des positions à cliquer (tu peux les ajuster)
+positions = [(100, 200), (300, 400), (500, 600)]
 
-if __name__ == "__main__":
-    time.sleep(3)  # Temps pour revenir dans la fenêtre de jeu
+print("✅ Appuie sur la touche F2 pour commencer.")
+keyboard.wait("F2")  # Attend que tu appuies sur F2
 
-    positions = [
-        (800, 400),
-        (900, 500),
-        (1000, 600)
-    ]
+print("🚀 Script lancé. Appuie sur 'Esc' pour arrêter.")
 
-    for pos in positions:
-        move_to(*pos)
-        time.sleep(1.5)  # Temps pour que le perso se déplace
+while True:
+    if keyboard.is_pressed("esc"):
+        print("🛑 Script arrêté.")
+        break
+
+    for x, y in positions:
+        print(f"➡️ Clique en ({x}, {y})")
+        pyautogui.click(x, y)
+        time.sleep(1)  # Attendre 1 seconde entre les clics
